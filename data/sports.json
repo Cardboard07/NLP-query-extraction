@@ -1,0 +1,44 @@
+{
+  "cricket": [
+    "cricket match",
+    "cricket matches",
+    "cricket highlights",
+    "live cricket match",
+    "t20 match",
+    "odi match",
+    "test match",
+    "cricket world cup match",
+    "asia cup match"
+  ],
+  "football": [
+    "football match",
+    "football matches",
+    "football highlights",
+    "soccer match",
+    "soccer matches",
+    "live football",
+    "football league match",
+    "football goals highlights"
+  ],
+  "boxing": [
+    "boxing match",
+    "boxing fight",
+    "boxing highlights",
+    "title fight boxing",
+    "heavyweight boxing match"
+  ],
+  "mma": [
+    "mma fight",
+    "ufc fight",
+    "ufc fight night",
+    "mma highlights",
+    "mixed martial arts fight"
+  ],
+  "basketball": [
+    "basketball match",
+    "basketball matches",
+    "basketball highlights",
+    "nba game",
+    "nba basketball match"
+  ]
+}

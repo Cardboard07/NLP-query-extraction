@@ -1,0 +1,14 @@
+name: query-nlp
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - numpy
+  - scikit-learn
+  - spacy
+  - pytest
+  - pip
+  - pip:
+      - sentence-transformers==2.2.2
+      - symspellpy==6.7.7
+      - dateparser==1.2.0

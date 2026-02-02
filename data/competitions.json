@@ -1,0 +1,7 @@
+{
+  "cricket": ["t20", "odi", "test"],
+  "boxing": ["title fight", "heavyweight bout"],
+  "mma": ["ufc fight night"],
+  "football": [],
+  "basketball": []
+}
