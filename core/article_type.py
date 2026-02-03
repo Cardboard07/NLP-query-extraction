@@ -29,8 +29,9 @@ def detect_article_type(query: str) -> Optional[str]:
         return None
 
     for article_type in ARTICLE_TYPES_PRIORITY:
-        # Whole-word match only (no substrings)
-        pattern = rf"\b{re.escape(article_type)}\b"
+
+        pattern = rf"{re.escape(article_type)}"
+        
         if re.search(pattern, query):
             return article_type
 
