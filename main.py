@@ -1,3 +1,10 @@
+import subprocess
+import streamlit as st
+
+out = subprocess.check_output(["pip", "freeze"]).decode()
+st.code(out)
+st.stop()
+
 import streamlit as st
 import pandas as pd
 from pipeline import parse_query
