@@ -1,5 +1,4 @@
 numpy>=1.23
-sentence-transformers>=3.0.0
 torch>=1.13
 spacy>=3.7.0
 dateparser>=1.2.0
@@ -7,8 +6,10 @@ symspellpy>=6.7.7
 pandas>=1.5
 scikit-learn>=1.2
 requests>=2.31.0
-huggingface_hub>=0.25.0
-transformers>=4.40.0
+sentence-transformers==2.6.1
+huggingface_hub==0.20.3
+transformers==4.36.2
+torch==2.1.2
 
 # spaCy model
 https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.7.1/en_core_web_sm-3.7.1-py3-none-any.whl
