@@ -21,18 +21,15 @@ def encode(text: str) -> np.ndarray:
 
     inputs = tokenizer(
         text,
-        padding=True,
-        truncation=True,
-        return_tensors="pt"
+        return_tensors="pt",
+        truncation=True
     )
 
     with torch.no_grad():
         outputs = model(**inputs)
 
-    # Mean pooling (same idea as sentence-transformers)
-    embeddings = outputs.last_hidden_state.mean(dim=1)
+    embedding = outputs.last_hidden_state.mean(dim=1)
+    embedding = torch.nn.functional.normalize(embedding, p=2, dim=1)
 
-    # L2 normalize (equivalent to normalize_embeddings=True)
-    embeddings = torch.nn.functional.normalize(embeddings, p=2, dim=1)
+    return embedding.cpu().numpy()[0]  # <- FIX
 
-    return embeddings.cpu().numpy()
