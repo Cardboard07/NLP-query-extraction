@@ -1,14 +1,17 @@
-name: query-nlp
+name: nlp-query-extraction
 channels:
   - conda-forge
 dependencies:
   - python=3.10
-  - numpy
-  - scikit-learn
-  - spacy
-  - pytest
   - pip
+  - streamlit
+  - numpy
+  - pandas
+  - scikit-learn
   - pip:
-      - sentence-transformers==2.2.2
-      - symspellpy==6.7.7
-      - dateparser==1.2.0
+      - torch==2.1.2
+      - transformers==4.36.2
+      - dateparser>=1.2.0
+      - symspellpy>=6.7.7
+      - requests>=2.31.0
+      - openpyxl
