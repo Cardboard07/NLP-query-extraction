@@ -4,6 +4,8 @@ from typing import Optional, List, Tuple
 from pathlib import Path
 import json
 import numpy as np
+import re
+import streamlit as st
 
 from models.embedding import encode
 from utils.similarity import cosine_similarity
@@ -32,12 +34,19 @@ SEMANTIC_THRESHOLD = 0.35  # conservative by design
 def _explicit_mentions(
     query_lc: str, allowed: List[str]
 ) -> List[str]:
-    """
-    Return competitions that are explicitly present
-    as substrings in the query.
-    """
-    return [c for c in allowed if c in query_lc]
+    matches = []
+    for comp in allowed:
+        pattern = r"\b" + re.escape(comp) + r"\b"
+        if re.search(pattern, query_lc):
+            matches.append(comp)
+    return matches
 
+@st.cache_resource(show_spinner=False)
+def _pair_embedding(pair_text: str) -> np.ndarray:
+    """
+    Cached embedding for sport|competition pairs.
+    """
+    return encode(pair_text)
 
 def _validate_semantically(
     sport: str,
@@ -48,7 +57,7 @@ def _validate_semantically(
     Return semantic similarity score for sport|competition pair.
     """
     pair_text = f"{sport} | {competition}"
-    pair_vec = encode(pair_text)
+    pair_vec = _pair_embedding(pair_text)
     
     # FIX 1: Reshape 1D vectors -> 2D matrices (1 row, N columns)
     # FIX 2: Extract the scalar value ([0][0]) from the result matrix
