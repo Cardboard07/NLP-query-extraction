@@ -9,6 +9,7 @@ def load_ner():
         model="dslim/bert-base-NER",
         aggregation_strategy="simple"
     )
+
 ALLOWED_LABELS = {"PERSON", "ORG", "GPE"}
 
 BLOCK_TOKENS = {
@@ -17,13 +18,13 @@ BLOCK_TOKENS = {
     "full", "final", "practice",
 }
 
-# Mapping HF → spaCy-style labels
+# HF → spaCy-style labels
+# NOTE: LOC intentionally treated as GPE (surface extraction only)
 LABEL_MAP = {
     "PER": "PERSON",
     "ORG": "ORG",
     "LOC": "GPE",
 }
-
 
 def extract_participants(normalized_query: str) -> Optional[List[str]]:
     ner = load_ner()
@@ -37,9 +38,11 @@ def extract_participants(normalized_query: str) -> Optional[List[str]]:
         if label not in ALLOWED_LABELS:
             continue
 
-        text = ent["word"]
-        tokens = text.split()
+        text = ent.get("word", "").replace("##", "").strip()
+        if not text:
+            continue
 
+        tokens = [t.strip(".,!?:;—") for t in text.split()]
         if any(tok in BLOCK_TOKENS for tok in tokens):
             continue
 
